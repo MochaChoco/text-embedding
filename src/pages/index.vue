@@ -5,15 +5,41 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
 
-async function search_text(keyword: string) {
-  const response = await fetch(
-    `https://n4vwwvk2m8.execute-api.us-east-1.amazonaws.com/text-embedding-stage/search?search-text=${keyword}`
-  );
+const apiBaseUrl =
+  "https://wap9y42o98.execute-api.ap-northeast-2.amazonaws.com/text-embedding";
+
+async function searchText(keyword: string) {
+  const response = await fetch(`${apiBaseUrl}?s=${keyword}`);
+  const data = await response.json();
+  console.log("data", data);
+}
+
+async function getAllText() {
+  const response = await fetch(`${apiBaseUrl}/lists`);
+  const data = await response.json();
+  console.log("data", data);
+}
+
+async function insertText(keyword: string) {
+  const response = await fetch(apiBaseUrl, {
+    method: "POST",
+    headers: {
+      Accept: "application/json, text/plain",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+    mode: "cors",
+    body: JSON.stringify({
+      "insert-text": keyword,
+    }),
+  });
   const data = await response.json();
   console.log("data", data);
 }
 
 onMounted(function () {
-  search_text("사과");
+  searchText("사과1");
+  getAllText();
+
+  // insertText("체리");
 });
 </script>
