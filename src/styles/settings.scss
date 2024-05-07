@@ -8,3 +8,13 @@
 // @use 'vuetify/settings' with (
 //   $color-pack: false
 // );
+
+.container {
+  width: 50vw;
+
+  .list-container {
+    height: calc(100vh - 190px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+}

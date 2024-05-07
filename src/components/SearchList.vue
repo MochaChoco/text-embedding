@@ -1,19 +1,35 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 
 const fruitList = ref([]);
-const keyword = ref<string>("");
+const form = ref<{
+  keyword: string;
+}>({
+  keyword: "",
+});
 
 const isLoading = ref<boolean>(false);
+
+const rules = computed(() => ({
+  keyword: { required },
+}));
+
+const v$ = useVuelidate(rules, form);
 
 const apiBaseUrl =
   "https://wap9y42o98.execute-api.ap-northeast-2.amazonaws.com/text-embedding";
 
 async function searchFruit() {
+  const res = await v$.value.$validate();
+  if (!res) return;
+
   isLoading.value = true;
 
-  const response = await fetch(`${apiBaseUrl}?s=${keyword.value}`);
-  keyword.value = "";
+  const response = await fetch(`${apiBaseUrl}?s=${form.value.keyword}`);
+  form.value.keyword = "";
+  v$.value.$reset();
 
   const result = await response.json();
   isLoading.value = false;
@@ -22,34 +38,8 @@ async function searchFruit() {
   console.log("fruit List", result);
 }
 
-async function getAllFruit() {
-  const response = await fetch(`${apiBaseUrl}/lists`);
-  const result = await response.json();
-  fruitList.value = result.data;
-  console.log("all List", result);
-}
-
-async function insertText() {
-  isLoading.value = true;
-
-  const response = await fetch(apiBaseUrl, {
-    method: "POST",
-    headers: {
-      Accept: "application/json, text/plain",
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-    mode: "cors",
-    body: JSON.stringify({
-      "insert-text": keyword.value,
-    }),
-  });
-  keyword.value = "";
-
-  const data = await response.json();
-  isLoading.value = false;
-  console.log("data", data);
-
-  getAllFruit();
+function validateState(name: string, text: string) {
+  return v$.value[name]?.$dirty && v$.value[name]?.$error ? text : "";
 }
 </script>
 
@@ -68,9 +58,10 @@ async function insertText() {
     <v-form @submit.prevent="searchFruit">
       <v-text-field
         class="mt-4"
-        v-model="keyword"
+        v-model="form.keyword"
         label="검색할 과일을 입력해주세요."
         hide-details
+        :error-messages="validateState('keyword', 'error')"
       ></v-text-field>
       <v-btn class="mt-2" type="submit" :loading="isLoading" block
         >Submit</v-btn
@@ -79,14 +70,4 @@ async function insertText() {
   </v-container>
 </template>
 
-<style scoped lang="scss">
-.container {
-  width: 50vw;
-
-  .list-container {
-    height: calc(100vh - 190px);
-    overflow-x: hidden;
-    overflow-y: scroll;
-  }
-}
-</style>
+<style scoped lang="scss"></style>
