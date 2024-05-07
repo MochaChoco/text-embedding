@@ -2,6 +2,7 @@
 import { ref, computed } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
+import sanitizeHtml from "sanitize-html";
 import { FormType, FruitListType } from "@/types/Fruit";
 
 const fruitList = ref<FruitListType>([]);
@@ -25,7 +26,12 @@ async function searchFruit() {
 
   isLoading.value = true;
 
-  const response = await fetch(`${apiBaseUrl}?s=${form.value.keyword}`);
+  const pureKeyword = sanitizeHtml(form.value.keyword, {
+    allowedTags: [],
+    allowedAttributes: [],
+  });
+
+  const response = await fetch(`${apiBaseUrl}?s=${pureKeyword}`);
   form.value.keyword = "";
   v$.value.$reset();
 

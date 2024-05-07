@@ -2,6 +2,7 @@
 import { onMounted, ref, computed } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
+import sanitizeHtml from "sanitize-html";
 import { FormType, FruitListType } from "@/types/Fruit";
 
 const fruitList = ref<FruitListType>([]);
@@ -30,6 +31,11 @@ async function insertFruit() {
   const res = await v$.value.$validate();
   if (!res) return;
 
+  const pureKeyword = sanitizeHtml(form.value.keyword, {
+    allowedTags: [],
+    allowedAttributes: [],
+  });
+
   isLoading.value = true;
 
   const response = await fetch(apiBaseUrl, {
@@ -40,7 +46,7 @@ async function insertFruit() {
     },
     mode: "cors",
     body: JSON.stringify({
-      "insert-text": form.value.keyword,
+      "insert-text": pureKeyword,
     }),
   });
   form.value.keyword = "";
