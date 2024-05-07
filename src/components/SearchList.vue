@@ -2,11 +2,10 @@
 import { ref, computed } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
+import { FormType, FruitListType } from "@/types/Fruit";
 
-const fruitList = ref([]);
-const form = ref<{
-  keyword: string;
-}>({
+const fruitList = ref<FruitListType>([]);
+const form = ref<FormType>({
   keyword: "",
 });
 
@@ -18,8 +17,7 @@ const rules = computed(() => ({
 
 const v$ = useVuelidate(rules, form);
 
-const apiBaseUrl =
-  "https://wap9y42o98.execute-api.ap-northeast-2.amazonaws.com/text-embedding";
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 async function searchFruit() {
   const res = await v$.value.$validate();
