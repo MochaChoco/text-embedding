@@ -24,12 +24,13 @@ async function searchFruit() {
   const res = await v$.value.$validate();
   if (!res) return;
 
-  isLoading.value = true;
-
   const pureKeyword = sanitizeHtml(form.value.keyword, {
     allowedTags: [],
     nonTextTags: ["style", "script", "textarea", "option", "noscript"],
   });
+  if (pureKeyword === "") return;
+
+  isLoading.value = true;
 
   const response = await fetch(`${apiBaseUrl}?s=${pureKeyword}`);
   form.value.keyword = "";

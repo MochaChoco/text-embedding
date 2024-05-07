@@ -35,6 +35,7 @@ async function insertFruit() {
     allowedTags: [],
     nonTextTags: ["style", "script", "textarea", "option", "noscript"],
   });
+  if (pureKeyword === "") return;
 
   isLoading.value = true;
 
