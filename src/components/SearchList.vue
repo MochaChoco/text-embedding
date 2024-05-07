@@ -3,7 +3,8 @@ import { ref, computed } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import sanitizeHtml from "sanitize-html";
-import { FormType, FruitListType } from "@/types/Fruit";
+import { FormType, FruitListType } from "@/types/Fruit1";
+import { findFruitApi } from "@/api/fruitList";
 
 const fruitList = ref<FruitListType>([]);
 const form = ref<FormType>({
@@ -18,8 +19,6 @@ const rules = computed(() => ({
 
 const v$ = useVuelidate(rules, form);
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
 async function searchFruit() {
   const res = await v$.value.$validate();
   if (!res) return;
@@ -32,7 +31,7 @@ async function searchFruit() {
 
   isLoading.value = true;
 
-  const response = await fetch(`${apiBaseUrl}?s=${pureKeyword}`);
+  const response = await findFruitApi(pureKeyword);
   form.value.keyword = "";
   v$.value.$reset();
 

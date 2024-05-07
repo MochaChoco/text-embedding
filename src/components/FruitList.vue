@@ -3,7 +3,8 @@ import { onMounted, ref, computed } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import sanitizeHtml from "sanitize-html";
-import { FormType, FruitListType } from "@/types/Fruit";
+import { FormType, FruitListType } from "@/types/Fruit1";
+import { getAllFruitApi, insertFruitApi } from "@/api/fruitList";
 
 const fruitList = ref<FruitListType>([]);
 const form = ref<FormType>({
@@ -18,10 +19,8 @@ const rules = computed(() => ({
 
 const v$ = useVuelidate(rules, form);
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
 async function getAllFruit() {
-  const response = await fetch(`${apiBaseUrl}/lists`);
+  const response = await getAllFruitApi();
   const result = await response.json();
   fruitList.value = result.data;
   console.log("all List", result);
@@ -39,17 +38,7 @@ async function insertFruit() {
 
   isLoading.value = true;
 
-  const response = await fetch(apiBaseUrl, {
-    method: "POST",
-    headers: {
-      Accept: "application/json, text/plain",
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-    mode: "cors",
-    body: JSON.stringify({
-      "insert-text": pureKeyword,
-    }),
-  });
+  const response = await insertFruitApi(pureKeyword);
   form.value.keyword = "";
   v$.value.$reset();
 
