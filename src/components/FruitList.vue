@@ -33,7 +33,7 @@ async function insertFruit() {
 
   const pureKeyword = sanitizeHtml(form.value.keyword, {
     allowedTags: [],
-    allowedAttributes: [],
+    nonTextTags: ["style", "script", "textarea", "option", "noscript"],
   });
 
   isLoading.value = true;

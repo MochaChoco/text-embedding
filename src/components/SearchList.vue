@@ -28,7 +28,7 @@ async function searchFruit() {
 
   const pureKeyword = sanitizeHtml(form.value.keyword, {
     allowedTags: [],
-    allowedAttributes: [],
+    nonTextTags: ["style", "script", "textarea", "option", "noscript"],
   });
 
   const response = await fetch(`${apiBaseUrl}?s=${pureKeyword}`);
