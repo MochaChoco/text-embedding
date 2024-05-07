@@ -45,6 +45,8 @@ AI를 이용한 Text Embedding 프로젝트입니다. 검색어를 입력하면 
 ```
 npm install  // dependency 설치
 npm run dev  // 로컬 환경 실행
+
+http://localhost:3000/text-embedding
 ```
 
 ## 2. yarn일 경우
@@ -52,6 +54,8 @@ npm run dev  // 로컬 환경 실행
 ```
 yarn install  // dependency 설치
 yarn dev      // 로컬 환경 실행
+
+http://localhost:3000/text-embedding
 ```
 
 &nbsp;

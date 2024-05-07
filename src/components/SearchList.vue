@@ -3,7 +3,7 @@ import { ref, computed } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import sanitizeHtml from "sanitize-html";
-import { FormType, FruitListType } from "@/types/Fruit1";
+import { FormType, FruitListType } from "@/types/fruit";
 import { findFruitApi } from "@/api/fruitList";
 
 const fruitList = ref<FruitListType>([]);
