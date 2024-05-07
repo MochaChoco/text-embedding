@@ -1,81 +1,63 @@
-# Vuetify (Default)
+# Text Embedding (Front-end)
 
-This is the official scaffolding tool for Vuetify, designed to give you a head start in building your new Vuetify application. It sets up a base template with all the necessary configurations and standard directory structure, enabling you to begin development without the hassle of setting up the project from scratch.
+AI를 이용한 Text Embedding 프로젝트입니다. 검색어를 입력하면 해당 검색어와 유사한 단어를 지닌 목록이 출력됩니다.
 
-## ❗️ Important Links
+해당 Git Repository에는 Front-end 코드만 업로드된 상태입니다.
 
-- 📄 [Docs](https://vuetifyjs.com/)
-- 🚨 [Issues](https://issues.vuetifyjs.com/)
-- 🏬 [Store](https://store.vuetifyjs.com/)
-- 🎮 [Playground](https://play.vuetifyjs.com/)
-- 💬 [Discord](https://community.vuetifyjs.com)
+![](https://velog.velcdn.com/images/swj9077/post/42ba73a0-07f1-4daf-ba6b-96911607cb28/image.png)
 
-## 💿 Install
+## 개발 환경
 
-Set up your project using your preferred package manager. Use the corresponding command to install the dependencies:
+개발 환경은 다음과 같습니다.
 
-| Package Manager                                                | Command        |
-|---------------------------------------------------------------|----------------|
-| [yarn](https://yarnpkg.com/getting-started)                   | `yarn install` |
-| [npm](https://docs.npmjs.com/cli/v7/commands/npm-install)     | `npm install`  |
-| [pnpm](https://pnpm.io/installation)                          | `pnpm install` |
-| [bun](https://bun.sh/#getting-started)                        | `bun install`  |
+1. Front-end : Vue3 + Vuetify + Typescript
+2. Back-end : Python + Aws Lambda + AWS API Gateway
+3. Database : MongoDB Atlas + Pymongo
+4. Model : OpenAI Embedding API
 
-After completing the installation, your environment is ready for Vuetify development.
+## 구현 기능
 
-## ✨ Features
+1. Client-side에서 간단한 form validation 기능 구현
+2. Python + Aws Lambda + AWS API Gateway로 Serverless 환경 구축
+3. OpenAI Embedding API를 활용한 Text Embedding 검색 기능 구현
+4. Pymongo 라이브러리로 DB 입력 기능 구현
 
-- 🖼️ **Optimized Front-End Stack**: Leverage the latest Vue 3 and Vuetify 3 for a modern, reactive UI development experience. [Vue 3](https://v3.vuejs.org/) | [Vuetify 3](https://vuetifyjs.com/en/)
-- 🗃️ **State Management**: Integrated with [Pinia](https://pinia.vuejs.org/), the intuitive, modular state management solution for Vue.
-- 🚦 **Routing and Layouts**: Utilizes Vue Router for SPA navigation and vite-plugin-vue-layouts for organizing Vue file layouts. [Vue Router](https://router.vuejs.org/) | [vite-plugin-vue-layouts](https://github.com/JohnCampionJr/vite-plugin-vue-layouts)
-- 💻 **Enhanced Development Experience**: Benefit from TypeScript's static type checking and the ESLint plugin suite for Vue, ensuring code quality and consistency. [TypeScript](https://www.typescriptlang.org/) | [ESLint Plugin Vue](https://eslint.vuejs.org/)
-- ⚡ **Next-Gen Tooling**: Powered by Vite, experience fast cold starts and instant HMR (Hot Module Replacement). [Vite](https://vitejs.dev/)
-- 🧩 **Automated Component Importing**: Streamline your workflow with unplugin-vue-components, automatically importing components as you use them. [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
-- 🛠️ **Strongly-Typed Vue**: Use vue-tsc for type-checking your Vue components, and enjoy a robust development experience. [vue-tsc](https://github.com/johnsoncodehk/volar/tree/master/packages/vue-tsc)
+## 테스트 방법
 
-These features are curated to provide a seamless development experience from setup to deployment, ensuring that your Vuetify application is both powerful and maintainable.
+1. 우측 하단의 input 영역에 임의의 과일 이름을 몇 개 입력합니다. (생략하셔도 됩니다.)
+2. 좌측 하단의 input 영역에 임의의 과일 이름을 입력합니다.
+3. "검색 결과 목록"에 입력한 과일과 유사한 과일이 결과로 나왔는지 확인합니다.
 
-## 💡 Usage
+## 테스트 주소
 
-This section covers how to start the development server and build your project for production.
+아래의 링크에서 직접 테스트 해볼 수 있습니다.
 
-### Starting the Development Server
+[테스트 주소로 바로가기](https://mochachoco.github.io/text-embedding)
 
-To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:3000](http://localhost:3000):
+&nbsp;
 
-```bash
-yarn dev
+# 설치 및 실행
+
+로컬에서 설치 및 실행 방법은 다음과 같습니다. 현재 Access-Control-Allow-Origin에 localhost가 등록되지 않은 상태이므로, 위의 테스트 주소에서 테스트 하시는 것을 권장드립니다.
+
+## 1. npm일 경우
+
+```
+npm install  // dependency 설치
+npm run dev  // 로컬 환경 실행
 ```
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+## 2. yarn일 경우
 
-> Add NODE_OPTIONS='--no-warnings' to suppress the JSON import warnings that happen as part of the Vuetify import mapping. If you are on Node [v21.3.0](https://nodejs.org/en/blog/release/v21.3.0) or higher, you can change this to NODE_OPTIONS='--disable-warning=5401'. If you don't mind the warning, you can remove this from your package.json dev script.
-
-### Building for Production
-
-To build your project for production, use:
-
-```bash
-yarn build
+```
+yarn install  // dependency 설치
+yarn dev      // 로컬 환경 실행
 ```
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+&nbsp;
 
-Once the build process is completed, your application will be ready for deployment in a production environment.
+# 상세 설명
 
-## 💪 Support Vuetify Development
+프로젝트에 대한 상세 설명은 다음 링크를 참고 부탁드립니다.
 
-This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library with a comprehensive collection of Vue components. Vuetify is an MIT licensed Open Source project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/). If you are interested in supporting this project, please consider:
-
-- [Requesting Enterprise Support](https://support.vuetifyjs.com/)
-- [Sponsoring John on Github](https://github.com/users/johnleider/sponsorship)
-- [Sponsoring Kael on Github](https://github.com/users/kaelwd/sponsorship)
-- [Supporting the team on Open Collective](https://opencollective.com/vuetify)
-- [Becoming a sponsor on Patreon](https://www.patreon.com/vuetify)
-- [Becoming a subscriber on Tidelift](https://tidelift.com/subscription/npm/vuetify)
-- [Making a one-time donation with Paypal](https://paypal.me/vuetify)
-
-## 📑 License
-[MIT](http://opensource.org/licenses/MIT)
-
-Copyright (c) 2016-present Vuetify, LLC
+[작성자 velog 바로 가기](https://velog.io/@swj9077/AI%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-Text-Embedding%EC%9C%BC%EB%A1%9C-%EA%B2%80%EC%83%89-%EA%B8%B0%EB%8A%A5-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0)
