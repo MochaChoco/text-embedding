@@ -2,9 +2,8 @@
 import { onMounted, ref, computed } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
-import sanitizeHtml from "sanitize-html";
 import { FormType, FruitListType } from "@/types/fruit";
-import { getAllFruitApi, insertFruitApi } from "@/api/fruitList";
+import { getAllFruitApi } from "@/api/fruitList";
 
 const fruitList = ref<FruitListType>([]);
 const form = ref<FormType>({
