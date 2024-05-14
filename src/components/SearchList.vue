@@ -68,7 +68,7 @@ function validateState(name: string, text: string) {
         :error-messages="validateState('keyword', 'error')"
       ></v-text-field>
       <v-btn class="mt-2" type="submit" :loading="isLoading" block
-        >Submit</v-btn
+        >Search</v-btn
       >
     </v-form>
   </v-container>

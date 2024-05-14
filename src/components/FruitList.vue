@@ -30,23 +30,7 @@ async function insertFruit() {
   const res = await v$.value.$validate();
   if (!res) return;
 
-  const pureKeyword = sanitizeHtml(form.value.keyword, {
-    allowedTags: [],
-    nonTextTags: ["style", "script", "textarea", "option", "noscript"],
-  });
-  if (pureKeyword === "") return;
-
-  isLoading.value = true;
-
-  const response = await insertFruitApi(pureKeyword);
-  form.value.keyword = "";
-  v$.value.$reset();
-
-  const data = await response.json();
-  isLoading.value = false;
-  console.log("data", data);
-
-  getAllFruit();
+  alert("현재 등록 기능은 임시로 막아놓은 상태입니다.");
 }
 
 function validateState(name: string, text: string) {
@@ -79,7 +63,7 @@ onMounted(function () {
         :error-messages="validateState('keyword', 'error')"
       ></v-text-field>
       <v-btn class="mt-2" type="submit" :loading="isLoading" block
-        >Submit</v-btn
+        >Regist Fruit</v-btn
       >
     </v-form>
   </v-container>
